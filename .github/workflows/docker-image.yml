@@ -15,9 +15,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setup JDK
-      uses: actions/setup_java@v3
+      uses: actions/setup-java@v3
       with:
-          java_version: 21
+        distribution: temurin
+        java-version: 21-ea
     - name: Tests execution
       run: ./gradlew test
     - name: Prepare App for image
