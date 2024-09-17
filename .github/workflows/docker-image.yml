@@ -1,0 +1,28 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup JDK
+      uses: actions/setup_java@v4
+      with:
+          java_version: 21
+    - name: Tests execution
+      run: ./gradlew test
+    - name: Prepare App for image
+      run: ./gradlew bootJar
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag {DOCKER_USERNAME}/demo-ci-proj
+    - name: Push the Docker image
+      run: docker push {DOCKER_USERNAME}/demo-ci-proj
