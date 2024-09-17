@@ -24,6 +24,6 @@ jobs:
     - name: Prepare App for image
       run: ./gradlew bootJar
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag {DOCKER_USERNAME}/demo-ci-proj
+      run: docker build . --file Dockerfile --tag ${DOCKER_USERNAME}/demo-ci-proj
     - name: Push the Docker image
-      run: docker push {DOCKER_USERNAME}/demo-ci-proj
+      run: docker push ${DOCKER_USERNAME}/demo-ci-proj
