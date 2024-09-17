@@ -1,6 +1,7 @@
 FROM openjdk:21
 WORKDIR /demo-ci-proj
-RUN ./gradlew clean bootJar
+
+#RUN ./gradlew clean bootJar
 COPY build/libs/*.jar demo-ci-proj-0.0.1-SNAPSHOT.jar
 
 EXPOSE 8081
