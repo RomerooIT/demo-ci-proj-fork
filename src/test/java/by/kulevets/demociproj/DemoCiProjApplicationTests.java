@@ -7,9 +7,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class DemoCiProjApplicationTests {
 
-    @Test
-    @Disabled("No need yet")
-    void contextLoads() {
-    }
 
 }
