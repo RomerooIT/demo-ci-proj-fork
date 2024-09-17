@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setup JDK
-      uses: actions/setup_java@v4
+      uses: actions/setup_java@v3
       with:
           java_version: 21
     - name: Tests execution
