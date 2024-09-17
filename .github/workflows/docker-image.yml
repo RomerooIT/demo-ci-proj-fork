@@ -39,4 +39,4 @@ jobs:
         file: Dockerfile
         platforms: linux/amd64,linux/arm64
         push: true
-        tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}:$GITHUB_SHA
+        tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}:${{ github.sha }}
