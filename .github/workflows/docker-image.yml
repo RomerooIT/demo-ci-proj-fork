@@ -22,9 +22,9 @@ jobs:
     - name: Tests execution
       run: ./gradlew test
     - name: Prepare App for image
-      run: ./gradlew bootJar
-            mkdir build-output
-            cp build/libs/demo-ci-proj-0.0.1-SNAPSHOT.jar build-output/
+      run: ./gradlew bootJar &&
+          mkdir build-output &&
+          cp build/libs/demo-ci-proj-0.0.1-SNAPSHOT.jar build-output/
     - name: LS -alrt
       run: cd build/libs && ls -alrt
     - name: Login to Docker Hub
