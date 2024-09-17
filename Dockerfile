@@ -6,6 +6,8 @@ WORKDIR /demo-ci-proj
 RUN ls -alrt
 RUN curl -L https://services.gradle.org/distributions/gradle-8.10.1-bin.zip -o gradle-8.10.1-bin.zip && \
     unzip gradle-8.10.1-bin.zip && \
+    sudo apt-get update -y &&  \
+    sudo apt-get install -y unzip && \
     echo 'export GRADLE_HOME=/app/gradle-8.10.1' >> $HOME/.bashrc && \
     echo 'export PATH=$PATH:$GRADLE_HOME/bin' >> $HOME/.bashrc && \
     /bin/bash -c "source $HOME/.bashrc" && \
