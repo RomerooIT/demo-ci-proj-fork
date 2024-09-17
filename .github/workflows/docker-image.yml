@@ -23,7 +23,7 @@ jobs:
       run: ./gradlew test
     - name: Prepare App for image
       run: ./gradlew bootJar
-            mkdir -p build-output
+            mkdir build-output
             cp build/libs/demo-ci-proj-0.0.1-SNAPSHOT.jar build-output/
     - name: LS -alrt
       run: cd build/libs && ls -alrt
