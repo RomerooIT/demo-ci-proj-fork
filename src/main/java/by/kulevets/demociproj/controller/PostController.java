@@ -1,15 +1,12 @@
 package by.kulevets.demociproj.controller;
 
 import by.kulevets.demociproj.entity.pojo.PostPojo;
-import by.kulevets.demociproj.repository.PostRepository;
 import by.kulevets.demociproj.service.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @AllArgsConstructor
