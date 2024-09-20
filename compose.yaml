@@ -29,7 +29,7 @@ services:
     ports:
       - "6379:6379"
   demo-ci-proj:
-    image: marael1701/demo-ci-proj
+    image: marael1701/demo-ci-proj:6efd96b3c229d6fa0c1c4c0268d53e473f82e628
     build:
       context: .
       dockerfile: Dockerfile

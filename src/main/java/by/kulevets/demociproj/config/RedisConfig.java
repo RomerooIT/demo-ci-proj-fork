@@ -20,7 +20,7 @@ public class RedisConfig {
     @Bean
     RedisConnectionFactory jedisConnectionFactory() {
         RedisStandaloneConfiguration config =  new RedisStandaloneConfiguration(
-                "redis",
+                "redis-master",
                 6379
         );
         return new JedisConnectionFactory(config);
