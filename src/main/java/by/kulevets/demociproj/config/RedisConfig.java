@@ -23,6 +23,7 @@ public class RedisConfig {
                 "redis-master",
                 6379
         );
+        config.setPassword("Uhsbp5jyDc");
         return new JedisConnectionFactory(config);
     }
 
