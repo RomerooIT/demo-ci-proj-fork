@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: test
+  name: ci-app
+  labels: 
+    app: ci-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ci-app
+  template:
+    metadata:
+      labels:
+        app: ci-app
+    spec:
+      containers:
+      - name: demo-ci-proj
+        image: marael1701/demo-ci-proj:c7afac768c483ee9f014fb485408f49ee0d05282
+        ports:
+        - containerPort: 8081
+        resources:
+         limits:
+           cpu: 1000m
+         requests:
+           cpu: 200m
+        readinessProbe:
+          httpGet:
+            scheme: HTTP
+            path: /manage/health
+            port: 8081
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            scheme: HTTP
+            path: /manage/health
+            port: 8081
+          initialDelaySeconds: 10
+          periodSeconds: 5
+
