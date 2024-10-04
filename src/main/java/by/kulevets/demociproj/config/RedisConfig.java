@@ -1,5 +1,6 @@
 package by.kulevets.demociproj.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -9,6 +10,13 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 @Configuration
 public class RedisConfig {
+
+    @Value("${spring.data.redis.host}")
+    private String redisHost;
+
+    @Value("${spring.data.redis.port}")
+    private String redisPort;
+
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate() {
@@ -20,10 +28,9 @@ public class RedisConfig {
     @Bean
     RedisConnectionFactory jedisConnectionFactory() {
         RedisStandaloneConfiguration config =  new RedisStandaloneConfiguration(
-                "redis-master",
-                6379
+                redisHost,
+                Integer.parseInt(redisPort)
         );
-        config.setPassword("Uhsbp5jyDc");
         return new JedisConnectionFactory(config);
     }
 

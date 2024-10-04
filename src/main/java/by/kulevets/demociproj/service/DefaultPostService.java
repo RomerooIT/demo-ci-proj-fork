@@ -8,28 +8,41 @@ import by.kulevets.demociproj.mapper.Mapper;
 import by.kulevets.demociproj.repository.PostRepository;
 import by.kulevets.demociproj.repository.RedisPostRepository;
 import by.kulevets.demociproj.utils.FluentdUtils;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fluentd.logger.FluentLogger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.RequestScope;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Spliterator;
 import java.util.stream.StreamSupport;
 
 @Service
-@AllArgsConstructor
+@RequestScope
 public class DefaultPostService implements PostService {
-
     private static final String POSTS_KEY = "posts";
-    private final FluentLogger LOG = FluentLogger.getLogger("[demo-ci-proj]", "fluentd", 24224);
+    private final FluentLogger LOG;
     private static final Logger log = LogManager.getLogger(DefaultPostService.class);
     private final PostRepository postRepository;
     private final RedisPostRepository redisPostRepository;
     private final RedisTemplate<String, Object> redisTemplate;
     private final Mapper mapper;
+
+    public DefaultPostService(@Value("${fluentd.host}")String fluentdHost,@Value("${fluentd.port}") String fluentdPort, PostRepository postRepository, RedisPostRepository redisPostRepository, RedisTemplate<String, Object> redisTemplate, Mapper mapper) {
+        this.LOG  = FluentLogger.getLogger(
+                "[demo-ci-proj]",
+                fluentdHost,
+                Integer.parseInt(fluentdPort));
+        this.postRepository = postRepository;
+        this.redisPostRepository = redisPostRepository;
+        this.redisTemplate = redisTemplate;
+        this.mapper = mapper;
+    }
 
     @Override
     public void create(PostPojo pojo) {
