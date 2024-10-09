@@ -5,6 +5,7 @@ import Axios from "axios";
 import "./main.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from "react-router-dom";
+import {getPostData} from "../api/api-connector";
 
 const PrivateArea = () => {
     const [postData, setPostData] = useState([]);
@@ -20,7 +21,7 @@ const PrivateArea = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await Axios.get("http://localhost:8081/api/v1/posts");
+                const response = await getPostData();
                 setPostData(response.data);
             } catch (err) {
                 console.error("Error fetching data:", err);

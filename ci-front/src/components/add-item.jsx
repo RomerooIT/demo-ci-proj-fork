@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Button, Container, Form} from 'react-bootstrap';
 import Axios from "axios";
 import {redirect, useNavigate} from "react-router-dom";
+import {savePost} from "../api/api-connector";
 
 
 function CreatePostForm() {
@@ -22,15 +23,7 @@ function CreatePostForm() {
 
         event.preventDefault();
         console.log(post);
-        Axios.post("http://localhost:8081/api/v1/create-post", post,
-            {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }
-        )
-            .then(res => res.data)
-            .catch(err => console.log(err));
+        savePost(post);
         console.log('Новый пост:', post);
     };
 
