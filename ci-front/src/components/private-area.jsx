@@ -1,7 +1,6 @@
 import {Button, Col, Container, Row} from "react-bootstrap";
 import Post from "./post-item";
 import {useEffect, useState} from "react";
-import Axios from "axios";
 import "./main.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from "react-router-dom";
@@ -12,7 +11,8 @@ const PrivateArea = () => {
 
     const splitArrayIntoGroups = (arr, groupSize) => {
         const result = [];
-        for (let i = 0; i < arr.length; i += groupSize) {
+        console.log(arr)
+        for (let i = 0; i < arr?.length; i += groupSize) {
             result.push(arr.slice(i, i + groupSize));
         }
         return result;
@@ -22,21 +22,24 @@ const PrivateArea = () => {
         const fetchData = async () => {
             try {
                 const response = await getPostData();
-                setPostData(response.data);
+                console.log("fetchData: " + response)
+                await setPostData(response);
             } catch (err) {
                 console.error("Error fetching data:", err);
             }
         };
 
         fetchData();
+        console.log(postData);
     }, []);
+
 
     return (
         <>
             <Container>
                 <Row style={{margin: '30px'}}>
                     <Col xs={10}>
-                        {postData.length !== 0 ? (
+                        {postData?.length !== 0 ? (
                             splitArrayIntoGroups(postData, 3).map((batch) => (
                                 <Row style={{margin: "20px"}}>
                                     {
